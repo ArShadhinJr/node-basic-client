@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Basic</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .card:hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+      .card:hover img {
+        transform: scale(1.1);
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h3 class='text-center'>Assalamu Alaikum. This is from Client.</h3>
+
+        <h2 class="text-center my-3 py-2 text-bg-success">Vegetables</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-2 g-4">
+      
+    </div>
+    </div>
+
+    
+    <script>
+        fetch("http://localhost:3000/vegetables")
+        .then((res) => res.json())
+        .then((data) => {
+          data.map((item) => {
+            const col = document.createElement("div");
+            col.classList.add("col");
+            col.innerHTML = `
+            <div class="card overflow-hidden">
+                <img src="${item.photo_url}" class="card-img-top" width="100%" >
+                <div class="card-body">
+                    <h5 class="card-title">${item.name}</h5>
+                    <p class="card-text my-0">Taste: ${item.quantity}</p>
+                    <p class="card-text my-0 mb-2">Price: ${item.price} Taka</p>
+                    <div class='d-flex md:flex-row flex-column gap-2'>
+                        <a href="#" class="btn btn-success md:w-50 w-100">Buy Now</a>
+                        <a href="#" class="btn btn-warning md:w-50 w-100">Add Cart</a>    
+                    </div>
+                </div>
+            </div>
+            `;
+            document.querySelector(".row").appendChild(col);
+          });
+        });
+
+
+
+      fetch("http://localhost:3000/")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          document.getElementsByTagName("h3")[0].innerHTML = data.Salam;
+        });
+
+      
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
